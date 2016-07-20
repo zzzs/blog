@@ -1,0 +1,64 @@
+/* =====MD===== */
+.md-body h1 {
+	font-size: 32px;
+	margin-left: 0;
+}
+.md-body h2, #content h2 {
+	font-size: 24px;
+	margin-left: 0;
+}
+.md-body h3, #content h3 {
+	font-size: 18px;
+	margin-left: 0;
+}
+.md-body blockquote {
+	margin: 20px 0;
+	padding: 10.5px 21px;
+	border: none;
+	border-left: 5px solid #ec2e4f;/*373E40*/
+	color: #666;
+	font-size: 1em;
+	/*background: #d9d9d9;*/
+}
+.md-body li{
+	margin: 10px 0;
+	line-height: 1.5em;
+	list-style: decimal;
+}
+.md-body ul li {
+	list-style: circle;
+}
+.md-body ol, ul {
+	margin-left: 20px;
+}
+.md-body>p{
+	padding: 0;
+	margin: 10px 0;
+	font-size: 16px;
+	line-height: 1.6em;
+}
+.md-body pre {
+	border-radius: 3px;
+	border: 1px dashed #ccc;
+	word-wrap: normal;
+	color: #fff;
+	text-shadow: none;
+	font-family: Consolas,Monaco,'Andale Mono',monospace;
+	direction: ltr;
+	text-align: left;
+	white-space: pre;
+	word-spacing: normal;
+	word-break: normal;
+	-moz-tab-size: 4;
+	-o-tab-size: 4;
+	tab-size: 4;
+	-webkit-hyphens: none;
+	-moz-hyphens: none;
+	-ms-hyphens: none;
+	hyphens: none;
+	background: #373E40;
+	padding: 1em;
+	overflow: auto;
+	margin: 1.2em 0!important;
+}
+/* =====MD===== */

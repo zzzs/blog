@@ -1,0 +1,72 @@
+/*评论*/
+#comments{
+	padding-bottom: 30px;
+}
+#comments .article-con .nickname a{
+	color: #00B38C;
+}
+#comments h6{
+	color: #b3b3b3;
+}
+.article-con{
+	 border-top: solid 10px #00B38C;
+	 padding: 5px 20px;
+	 margin: 10px 0;
+}
+.article-con .content p{
+	padding: 20px;
+	margin-bottom: 0;
+}
+.article-con .reply{
+	text-align: right;
+	padding: 5px 40px;
+}
+.article-con .reply a{
+	color: #00B38C;
+	font-size: 16px;
+	cursor: pointer;
+}
+.article-con .reply a:hover{
+	color: #00B38C;
+}
+
+#publish{
+	background-color: #ec2e4f;
+	padding: 10px;
+	text-align: center;
+	width: 100%;
+	cursor: pointer;
+}
+#publish a,#publish a:hover{
+	width: 100%;
+	display: inline-block;
+	cursor: pointer;
+	color: #fff;
+	opacity: 1;
+}
+#commentModal .modal-header{
+	background-color: #ec2e4f;
+	color: #fff;
+	border-bottom: none;
+	border-radius: 5px 5px 0 0;
+}
+#commentModal .modal-header span{
+	color: #fff;
+	text-shadow: none;
+	line-height: 1.4;
+}
+#commentModal .modal-footer #submit_but{
+	background-color: #1A9F8C;
+	color: #fff;
+}
+.article-con-child{
+  padding: 5px 0 0 10px;
+  margin: 10px 5px 5px 0px;
+  border: 1px dashed #00B38C;
+  border-left: 3px solid #00B38C;
+}
+div.content p{
+  word-break:break-all;
+}
+/*评论*/
+
