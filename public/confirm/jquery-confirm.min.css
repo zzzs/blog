@@ -598,21 +598,15 @@
 }
 
 .jconfirm.jconfirm-red .jconfirm-box div.closeIcon {
-	color: #393938
+	color: #fff
 }
 
 .jconfirm.jconfirm-red .jconfirm-box div.title-c {
-	color: #393938;
-	font-size: 22px;
-	font-weight: 700;
-	padding-left: 15px;
-	padding-right: 15px
+	color: #fff;
 }
 
 .jconfirm.jconfirm-red .jconfirm-box div.content {
-	text-align: left;
-	color: #393938;
-	padding: 0 15px
+	color: #fff;
 }
 
 .jconfirm.jconfirm-red .jconfirm-box .buttons {
@@ -628,12 +622,12 @@
 	text-shadow: none;
 	-webkit-transition: background .1s;
 	transition: background .1s;
-	color: #393938
+	color: #fff
 }
 
 .jconfirm.jconfirm-red .jconfirm-box .buttons button.btn-default {
 	box-shadow: none;
-	color: #393938;
+	color: #fff;
 	background-color: #ec2e4f;
 }
 

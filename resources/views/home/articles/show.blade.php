@@ -42,26 +42,21 @@
                     </div>
                   </div>
                   <div class="form-group">
-                    <label for="inputPassword3" name="email" class="col-sm-1 control-label">邮箱</label>
+                    <label for="inputPassword3" class="col-sm-1 control-label">邮箱</label>
                     <div class="col-sm-11">
-                      <input type="email" class="form-control" id="inputEmail3" placeholder="你的邮箱">
+                      <input type="email" name="email" class="form-control" id="inputEmail3" placeholder="你的邮箱">
                     </div>
                   </div>
                   <div class="form-group">
-                    <label for="inputPassword3" name="website" class="col-sm-1 control-label">主页</label>
+                    <label for="inputPassword3" class="col-sm-1 control-label">主页</label>
                     <div class="col-sm-11">
-                      <input type="website" class="form-control" id="inputEmail3" placeholder="你的个人主页">
+                      <input type="website" name="website" class="form-control" id="inputEmail3" placeholder="你的个人主页">
                     </div>
                   </div>
                   <div class="form-group">
                     <label class="col-sm-1 control-label">吐槽</label>
                     <div class="col-sm-11">
                       <textarea name="content" placeholder="吐槽" class="form-control" rows="3" required="required"></textarea>
-                    </div>
-                  </div>
-                  <div class="form-group" style="display:none">
-                    <div class="col-sm-offset-1 col-sm-10">
-                      <button type="submit" class="btn btn-default">Do</button>
                     </div>
                   </div>
                 </form>
@@ -81,25 +76,53 @@
 
       <!-- 发表评论 -->
     </div>
-
   </div>
 
   <script>
+    $(".reply a").click(function(){
+      $('#commentModal').modal('show');
+    });
     $('#commentModal').on('show.bs.modal', function (event) {
       var button = $(event.relatedTarget);
+      var modal = $(this);
+      modal.find("#comment-form input[name='nickname']").val('');
+      modal.find("#comment-form input[name='email']").val('');
+      modal.find("#comment-form input[name='website']").val('');
+      modal.find("#comment-form textarea[name='content']").attr('data-tonick','').val('');
       if (button.parent().attr("id") != 'publish') {
         var nickname = button.data('nickname');
         var comid = button.data('comid');
-        var modal = $(this);
-        modal.find("#comment-form textarea[name='content']").val('@'+nickname+'：');
+        modal.find("#comment-form textarea[name='content']").attr('data-tonick',nickname);
         modal.find("#comment-form input[name='pid']").val(comid);
+      }else{
+        modal.find("#comment-form input[name='pid']").val(0);
       }
     });
+
     $("#submit_but").click(function(){
-      $("form button[type='submit']").click();
+      var com_form = $("#comment-form");
+      var tonick = com_form.find("textarea[name='content']").attr('data-tonick');
+      if (tonick != '') {
+        var comment = com_form.find("textarea[name='content']").val();
+        com_form.find("textarea[name='content']").val('@'+tonick+'：'+comment);
+      }
+      $('.modal-header button span').click();
+      $.ajax({
+        type: "POST",
+        url: com_form.attr( 'action' ),
+        data: com_form.serialize(),
+        success: function( ret ) {
+          if (ret.status == 1) {
+            success_confirm(ret.msg,3000);
+          }else{
+            errar_confirm(ret.msg,3000);
+          }
+        }
+      });
     });
 
-    var contents = <?php echo $article->comments; ?>;
+    //评论
+    var contents = {!! $article->Comments !!};
     $.each(contents, function( index, value ) {
       createContentElement('comments',value);
     });

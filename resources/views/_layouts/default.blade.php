@@ -11,6 +11,7 @@
   <link href="{{ asset('/css/app.css') }}" rel="stylesheet">
   <link href="{{ asset('/css/common.css') }}" rel="stylesheet">
   <link href="{{ asset('/css/home/main.css') }}" rel="stylesheet">
+  <link href="{{ asset('/confirm/jquery-confirm.min.css') }}" rel="stylesheet">
 
   <!-- Fonts -->
   <!-- <link href='http://fonts.useso.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css'> -->
@@ -19,6 +20,8 @@
   <script src="{{ asset('/bootstrap/js/bootstrap.min.js') }}"></script>
   <script src="{{ asset('/js/js-particleslider.js') }}"></script>
   <script src="{{ asset('/js/common.js') }}"></script>
+  <script src="{{ asset('/confirm/jquery-confirm.min.js') }}"></script>
+  <script src="{{ asset('/js/confirm.js') }}"></script>
 
 </head>
 <body>

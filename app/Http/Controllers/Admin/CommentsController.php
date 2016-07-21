@@ -7,14 +7,18 @@ use Illuminate\Http\Request;
 
 use App\Models\Comment;
 use App\Models\Article;
-
+use App\Libs\Consts\Error;
 use Redirect, Input;
 
 class CommentsController extends CommonController {
 
-	public function edit($id)
+	public function store()
 	{
-		return view('admin.comments.edit')->withComment(Comment::find($id));
+		if ($ret = Comment::create(Input::except(['_token']))) {
+			$this->json_return($ret->toArray());
+		} else {
+			$this->json_return('',Error::COMMENT_PUBLISH_ERROR,0);
+		}
 	}
 
 	public function update(Request $request, $id)
@@ -26,26 +30,48 @@ class CommentsController extends CommonController {
 		if (Comment::where('id', $id)->update(Input::except(['_method', '_token']))) {
 			return Redirect::to('admin/comments');
 		} else {
-			return Redirect::back()->withInput()->withErrors('更新失败！');
+			return Redirect::back()->withInput()->withErrors(Error::UPDATE_ERROR);
 		}
 	}
 
+	/**
+	 * 删除评论
+	 * @param  [type] $id [description]
+	 * @return [type]     [description]
+	 */
 	public function destroy($id)
 	{
 		$comment = Comment::find($id);
-
 		//判断若有人评论，则不准删
 		if(count($comment->HasMe->toArray()) != 0){
-			$msg = '删除失败！';
-			$this->json_return('',$msg,1);
-			// return Redirect::back()->withErrors('删除失败！');
+			$msg = Error::COMMENT_HAS_CHILD;
+			$this->json_return('',$msg,0);
 		}else{
 			$comment->delete();
 			$this->json_return('');
 		}
-
-
-		// return Redirect::to('articles/comments/'.$comment->article_id);
 	}
 
+	/**
+	 * 审核评论
+	 * @param  Request $request [description]
+	 * @param  [type]  $id      [description]
+	 * @return [type]           [description]
+	 */
+	public function check(Request $request, $id)
+	{
+		$this->validate($request, [
+			'status' => 'required',
+		]);
+		$comment = Comment::find($id);
+		if (empty($comment)) {
+			$this->json_return('',Error::NOT_EXIST_RECODE,0);
+		}
+		$data = Input::except(['_method', '_token']);
+		if ($comment->update($data)) {
+			$this->json_return('');
+		} else {
+			$this->json_return('',Error::UPDATE_ERROR,0);
+		}
+	}
 }
