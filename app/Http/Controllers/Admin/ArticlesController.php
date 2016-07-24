@@ -54,7 +54,7 @@ class ArticlesController extends Controller {
 			'articles'=>$articles,
 			'cates'=>$cates,
 			'request'=>$request->all()
-			]);
+			])->withInput(['aaa'=>123]);
 	}
 
 	/**
