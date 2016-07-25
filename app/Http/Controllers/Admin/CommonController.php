@@ -70,10 +70,10 @@ class CommonController extends Controller {
 	 * json返回
 	 * @param  [type]  $data   [description]
 	 * @param  string  $msg    [description]
-	 * @param  integer $status [description]
+	 * @param  integer $status [1 is ok]
 	 * @return [type]          [description]
 	 */
-	public function json_return($data,$msg='',$status=0)
+	public function json_return($data,$msg='',$status=1)
 	{
 		header('Content-Type:application/json; charset=utf-8');
 		exit(json_encode([

@@ -25,26 +25,32 @@
   	+comment_data.comment_id
   	+"'>回复</a></div>";
 
-
-  	var comment_item;
+  	var comment_item,comment_wait_class='';
     //第一级
+    if (comment_data.status == 0) {
+      comment_wait_class ='comment_wait';
+    }
     if (comment_data.pid == 0){
     	comment_item = "<div id='con-"
     	+comment_data.comment_id
-    	+"' class='article-con'>"
+    	+"' class='article-con "
+      +comment_wait_class
+      +"'>"
     	+content_str
     	+"</div>";
 
     	$('#'+comments_id).append(comment_item);
     }else{
-
     	comment_item = "<div id='con-"
     	+comment_data.comment_id
-    	+"' class='article-con article-con-child'>"
+    	+"' class='article-con article-con-child "
+      +comment_wait_class
+      +"'>"
     	+content_str
     	+"</div>";
-
-    	$('#con-'+comment_data.pid).append(comment_item);
+      if($('#con-'+comment_data.pid).length>0){
+       $('#con-'+comment_data.pid).append(comment_item);
+      }
     }
 
 }

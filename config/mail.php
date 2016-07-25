@@ -28,7 +28,8 @@ return [
 	|
 	*/
 
-	'host' => env('MAIL_HOST', 'smtp.mailgun.org'),
+	// 'host' => env('MAIL_HOST', 'smtp.mailgun.org'),
+	'host' => 'smtp.qq.com',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -41,7 +42,8 @@ return [
 	|
 	*/
 
-	'port' => env('MAIL_PORT', 587),
+	// 'port' => env('MAIL_PORT', 587),
+	'port' => 25,
 
 	/*
 	|--------------------------------------------------------------------------
@@ -54,7 +56,8 @@ return [
 	|
 	*/
 
-	'from' => ['address' => null, 'name' => null],
+	// 'from' => ['address' => null, 'name' => null],
+	'from' => ['address' => '863837949@qq.com', 'name' => 'Laravel学院'],
 
 	/*
 	|--------------------------------------------------------------------------

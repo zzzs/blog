@@ -20,12 +20,41 @@ class ArticlesController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function index()
+	public function index(Request $request)
 	{
-		return view('admin.articles.index')->withArticles(
-			Article::withTrashed()->with(['Tag'=>function($q){
-				$q->select('tag_id','name');
-			}])->get());
+
+		$cates = Tag::select('tag_id','name')
+		->where('type',TagType::MAIN_MENU)
+		->get();
+		$articles = Article::withTrashed();
+
+		if (($request->cate)) {
+			$tag_id = $request->cate;
+			$articles->whereHas('Tag',function($q)use($tag_id){
+				$q->where('tag_id',$tag_id);
+			});
+		}
+
+		if (!is_null($request->comstatus) && $request->comstatus != '') {
+			$comstatus = $request->comstatus;
+			$articles->whereHas('Comments',function($q)use($comstatus){
+				$q->where('status',$comstatus);
+			});
+		}
+
+		if ($request->title) {
+			$articles->where('title','like','%'.$request->title.'%');
+		}
+
+		$articles = $articles->with(['Tag'=>function($q){
+			$q->select('tag_id','name');
+		}])->paginate(15);
+
+		return view('admin.articles.index',[
+			'articles'=>$articles,
+			'cates'=>$cates,
+			'request'=>$request->all()
+			]);
 	}
 
 	/**
@@ -163,9 +192,7 @@ class ArticlesController extends Controller {
 	{
 		$article = Article::select('article_id','title','html_body')
 		->with(['Comments'=>function($q){
-			$q->select('comment_id','article_id','nickname','email','website','content','pid','created_at')
-			->orderByRaw('pid,created_at')
-			->limit(1);
+			$q->where('status','<>',2)->orderByRaw('pid,created_at');
 		}])->find($id);
 
 		return view('admin.articles.comments')->withArticle($article);

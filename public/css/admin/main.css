@@ -26,3 +26,8 @@ table tr td{
 	text-overflow:ellipsis;
 }
 /*table*/
+
+.add_but{
+	margin-top: 7px;
+	float: right;
+}

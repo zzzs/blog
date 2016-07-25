@@ -10,7 +10,7 @@ class Comment extends Model {
 	protected $table = 'comments';
 	protected $primaryKey = 'comment_id';
 
-	protected $fillable = ['nickname', 'email', 'website', 'content', 'article_id', 'pid'];
+	protected $guarded = ['comment_id'];
 
     // 定义软删除的字段
 	const DELETED_AT = 'is_del';

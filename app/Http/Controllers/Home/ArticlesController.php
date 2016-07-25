@@ -8,7 +8,11 @@ class ArticlesController extends BaseController {
   public function show($id)
   {
   	$base_data = $this->base_index();
-    return view('home.articles.show',['article'=>Article::with('Comments')->find($id)]+$base_data);
+  	$article = Article::with([
+  		'Comments'=>function($q){
+  			$q->where('status','=',1)->orderByRaw('pid,created_at');
+  		}])->find($id);
+    return view('home.articles.show',['article'=>$article]+$base_data);
   }
 
 }

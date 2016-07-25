@@ -1,12 +1,39 @@
 @extends('admin.app')
-
 @section('content')
 <div class="container">
   <div class="row">
-    <div class="col-md-10 col-md-offset-1">
       <div class="panel panel-default">
-        <div class="panel-heading">文章
-          <a href="{{ URL('admin/articles/create') }}" class="btn btn-xs btn-primary">新增</a>
+        <div class="panel-heading">
+          <form class="form-inline" action="/admin/articles" method="GET">文章管理
+            <div class="form-group">
+              <label class="sr-only">分类</label>
+              <select class="form-control" name="cate">
+                <option value="" selected="selected">全部</option>
+                @foreach ($cates as $cate)
+                  @if (isset($request['cate']) && $cate->tag_id == $request['cate'])
+                  <option value="{{ $cate->tag_id }}" selected="selected">{{ $cate->name }}</option>
+                  @else
+                  <option value="{{ $cate->tag_id }}">{{ $cate->name }}</option>
+                  @endif
+                @endforeach
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="sr-only">评论</label>
+              <select class="form-control" name="comstatus">
+                <option value="" selected="selected">全部</option>
+                <option value="0">待处理</option>
+                <option value="1">通过</option>
+                <option value="2">拒绝</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="sr-only">标题</label>
+              <input type="text" name="title" value="{{ $request['title'] or '' }}" class="form-control" placeholder="标题">
+            </div>
+            <button type="submit" class="btn btn-default">Go</button>
+            <a href="{{ URL('admin/articles/create') }}" class="btn btn-xs btn-primary add_but">新增</a>
+          </form>
         </div>
 
         <div class="panel-body">
@@ -91,7 +118,15 @@
 
         </div>
       </div>
-    </div>
   </div>
 </div>
+<center>
+  {!! $articles->render() !!}
+</center>
+<script>
+var comstatus = {{ $request['comstatus'] or '' }};
+if (comstatus.length !== 0) {
+  $("form select[name='comstatus']").find("option[value="+comstatus+"]").attr('selected','selected');
+}
+</script>
 @endsection

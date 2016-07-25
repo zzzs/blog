@@ -2,23 +2,23 @@
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Admin\CommonController;
 
 use Illuminate\Http\Request;
 
 use Redirect, Input;
 
 use App\Models\Comment;
-
-class CommentsController extends Controller {
+use App\Libs\Consts\Error;
+class CommentsController extends CommonController {
 
 	public function store()
 	{
 		if (Comment::create(Input::all())) {
-			return Redirect::back();
+			$this->json_return('',Error::COMMENT_PUBLISH_SUCCESS,1);
 		} else {
-			return Redirect::back()->withInput()->withErrors('评论发表失败！');
+			$this->json_return('',Error::COMMENT_PUBLISH_ERROR,0);
 		}
-
 	}
 
 }

@@ -19,6 +19,7 @@
 
 	<script src="{{ asset('/js/js-particleslider.js') }}"></script>
 	<script src="{{ asset('/js/common.js') }}"></script>
+	<script src="{{ asset('/js/confirm.js') }}"></script>
 
 
 	<!-- Fonts -->

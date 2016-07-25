@@ -5,7 +5,7 @@
   <div class="row">
     <div class="col-md-10 col-md-offset-1">
       <div class="panel panel-default">
-        <div class="panel-heading">管理标签类型
+        <div class="panel-heading">标签类型管理
         <a href="{{ URL('admin/tagtypes/create') }}" class="btn btn-xs btn-primary">新增</a>
       </div>
 
