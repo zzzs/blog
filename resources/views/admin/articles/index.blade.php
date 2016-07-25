@@ -29,7 +29,7 @@
             </div>
             <div class="form-group">
               <label class="sr-only">标题</label>
-              <input type="text" name="title" value="<?php if(isset($request['title'])) echo $request['title']; ?>" class="form-control" placeholder="标题">
+              <input type="text" name="title" value="{{ $request['title'] or '' }}" class="form-control" placeholder="标题">
             </div>
             <button type="submit" class="btn btn-default">Go</button>
             <a href="{{ URL('admin/articles/create') }}" class="btn btn-xs btn-primary add_but">新增</a>
@@ -124,7 +124,7 @@
   {!! $articles->render() !!}
 </center>
 <script>
-var comstatus ="<?php if(isset($request['comstatus'])) echo $request['comstatus'];?>";
+var comstatus = {{ $request['comstatus'] or '' }};
 if (comstatus.length !== 0) {
   $("form select[name='comstatus']").find("option[value="+comstatus+"]").attr('selected','selected');
 }

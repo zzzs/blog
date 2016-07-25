@@ -101,7 +101,7 @@
         _token:_token
       },function(ret){
         if (ret.status == 0) {
-          errar_confirm(ret.msg,3000);
+          error_confirm(ret.msg,3000);
         }else{
           $("#con-"+comid).fadeTo("slow", 0.01,function(){
             $("#con-"+comid).slideUp("fast", function(){
@@ -128,7 +128,7 @@
         status:1
       },function(ret){
         if (ret.status == 0) {
-          errar_confirm(ret.msg,3000);
+          error_confirm(ret.msg,3000);
         }else{
           $("#con-"+comid).fadeOut("slow",function(){
             $("#con-"+comid).find('a.check_com').remove();
@@ -144,7 +144,7 @@
         status:2
       },function(ret){
         if (ret.status == 0) {
-          errar_confirm(ret.msg,3000);
+          error_confirm(ret.msg,3000);
         }else{
           $("#con-"+comid).fadeTo("slow", 0.01,function(){
             $("#con-"+comid).slideUp("fast", function(){
@@ -158,7 +158,7 @@
   //回复评论
   $(".reply a[data-toggle='modal']").click(function(){
     if($(this).parent().parent().is('.comment_wait')) {
-      errar_confirm('先审核再回复',3000);
+      error_confirm('先审核再回复',3000);
       $('#commentModal').modal('show');
       return;
     }
@@ -194,7 +194,7 @@
           createContentElement('comments',ret.data);
           $('#con-'+ret.data.comment_id).find('.reply').append("<a class='del_com'>删除</a>");
         }else{
-          errar_confirm(ret.msg,3000);
+          error_confirm(ret.msg,3000);
         }
       }
     });

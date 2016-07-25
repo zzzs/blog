@@ -115,7 +115,7 @@
           if (ret.status == 1) {
             success_confirm(ret.msg,3000);
           }else{
-            errar_confirm(ret.msg,3000);
+            error_confirm(ret.msg,3000);
           }
         }
       });

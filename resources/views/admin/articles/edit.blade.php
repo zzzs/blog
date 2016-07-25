@@ -325,11 +325,11 @@
           var body_con = $("#art_body").val();
           $("#art_body").val(body_con+'![图片替代文字]('+ret.data+')');
         }else{
-          errar_confirm(ret.msg);
+          error_confirm(ret.msg);
         }
       },
       error:function(){
-        errar_confirm('上传出错');
+        error_confirm('上传出错');
       }
     });
     $(this).val("");//必须
@@ -350,11 +350,11 @@
           var body_con = $("#art_body").val();
           $("#art_body").val(body_con+'\n'+ret.data);
         }else{
-          errar_confirm(ret.msg);
+          error_confirm(ret.msg);
         }
       },
       error:function(){
-        errar_confirm('上传出错');
+        error_confirm('上传出错');
       }
     });
     $(this).val("");

@@ -2,6 +2,7 @@
 
 use Closure;
 use Illuminate\Contracts\Auth\Guard;
+use App\Libs\Enums\User;
 
 class Authenticate {
 
@@ -44,6 +45,9 @@ class Authenticate {
 			}
 		}
 
+		if($request->user()->status != User::SUPER_STAR){
+			return view('auth.guest');
+		}
 		return $next($request);
 	}
 

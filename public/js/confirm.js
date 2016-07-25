@@ -4,7 +4,7 @@
  * @param  {[type]} time [description]
  * @return {[type]}      [description]
  */
-function errar_confirm(msg='错误',time=3000) {
+function error_confirm(msg='错误',time=3000) {
 	$.confirm({
 		title: msg,
 		content: false,
@@ -26,5 +26,14 @@ function success_confirm(msg='OK',time=3000) {
 		autoClose: 'confirm|'+time,
 		cancelButton: false,
 		theme: 'red'
+	});
+}
+
+function admin_error_confirm(msg='错误',time=3000) {
+	$.confirm({
+		title: msg,
+		content: false,
+		autoClose: 'cancel|'+time,
+		confirmButton: false
 	});
 }
