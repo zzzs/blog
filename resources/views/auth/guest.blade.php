@@ -24,18 +24,13 @@
 				text-align: center;
 				display: inline-block;
 			}
-			.content span{
-				float: right;
-				margin-top: -40px;
-				color: #393938;
-				font-weight: bold;
-			}
 			.title {
 				font-size: 72px;
 				margin-bottom: 40px;
 			}
 			.title a{
 				color: #1A9F8C;
+				font-size: 18px;
 				text-decoration: none;
 			}
 		</style>
@@ -43,7 +38,9 @@
 	<body>
 		<div class="container">
 			<div class="content">
-				<div class="title">WELCOME TO HERE</div>
+				<div class="title">WELCOME TO HERE
+					<a href="/auth/logout" title="退出">OUT</a>
+				</div>
 			</div>
 		</div>
 	</body>

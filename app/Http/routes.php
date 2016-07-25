@@ -35,6 +35,7 @@ Route::post('password/email', 'Auth\PasswordController@postEmail');
 Route::get('password/reset/{token}', 'Auth\PasswordController@getReset');
 Route::post('password/reset', 'Auth\PasswordController@postReset');
 
+	Route::get( 'test', [ 'as' => '查看评论', 'uses' => 'admin\TestController@send'] );
 
 
 Route::group(['namespace' => 'Home'], function()
@@ -50,7 +51,6 @@ Route::group(['prefix' => 'admin', 'middleware'=>'auth', 'namespace' => 'Admin']
 {
 	Route::get('/', 'AdminHomeController@index');
 
-	Route::get( 'test', [ 'as' => '查看评论', 'uses' => 'TestController@sendEmailReminder'] );
 	//文章
 	Route::put( 'articles/restore/{id}', [ 'as' => '文章恢复', 'uses' => 'ArticlesController@restore'] );
 	Route::post( 'articles/preview', [ 'as' => '文章预览', 'uses' => 'ArticlesController@preview'] );

@@ -37,3 +37,13 @@ function admin_error_confirm(msg='错误',time=3000) {
 		confirmButton: false
 	});
 }
+
+function admin_success_confirm(msg='OK',time=3000) {
+	$.confirm({
+		title: false,
+		content: msg,
+		autoClose: 'confirm|'+time,
+		cancelButton: false,
+		theme: 'white'
+	});
+}

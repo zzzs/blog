@@ -13,15 +13,12 @@ class TestController extends Controller{
      * @param  int  $id
      * @return Response
      */
-    public function sendEmailReminder(Request $request)
+    public function send(Request $request)
     {
-        // $user = User::findOrFail($id);
-// return 22;
-        // Mail::send('emails.reminder', ['aaa' => 123], function ($m){
-        //     $m->to($user->email, $user->name)->subject('Your Reminder!');
-        // });
-        Mail::raw('Text to e-mail', function ($m) {
-            $m->to('863837949@qq.com', 'sa')->subject('Your Reminder!');
+        $data = ['email'=>'15757857592@163.com', 'name'=>'lll'];
+        Mail::send('emails.test', $data, function($message) use($data)
+        {
+            $message->to($data['email'], $data['name'])->subject('欢迎注册我们的网站，请激活您的账号！');
         });
     }
 }
