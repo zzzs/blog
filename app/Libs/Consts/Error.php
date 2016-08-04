@@ -14,10 +14,11 @@ class Error
 	/*标签类型*/
 	CONST EXIST_TAGS = '该类型下存在标签不可删除！';
 
-	/*下载图片*/
-	CONST PIC_READ_ERROR = '读取文件错误';
-	CONST PIC_SIZE_ERROR = '文件不能超过2M';
-	CONST PIC_TYPE_ERROR = '文件类型错误';
+	/*下载文件*/
+	CONST FILE_READ_ERROR = '读取文件错误';
+	CONST FILE_SIZE_ERROR = '文件不能超过2M';
+	CONST FILE_TYPE_ERROR = '文件类型错误';
+	CONST FILE_UPLOAD_ERROR = '文件上传错误';
 
 	/*评论*/
 	CONST COMMENT_PUBLISH_ERROR = '评论发表失败！';

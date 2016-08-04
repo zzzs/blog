@@ -1,6 +1,91 @@
-/*评论*/
+/* 推荐 */
+.recommend{
+	padding: 20px;
+	font-size: 16px;
+	border: 1px dashed #ec2e4f;
+	border-top: 10px solid #ec2e4f;
+}
+.recommend a{
+	display: block;
+	padding: 7px;
+}
+/* 推荐 */
+
+/* 前后 */
+.arrow{
+	width: 350px;
+	height: 40px;
+	background-color: #ec2e4f;
+	position: relative;
+	border: 2px solid #ec2e4f;
+	text-align: center;
+	line-height: 35px;
+	text-overflow: ellipsis;
+	color: #fff;
+	font-size: 12px;
+	margin-bottom: 20px;
+}
+.arrow:hover{
+	color: #fff;
+}
+.arrow:after, .arrow:before {
+	border: solid transparent;
+	content: ' ';
+	height: 0;
+	position: absolute;
+	width: 0;
+}
+.arrow:after{
+	top: -2px;
+	width: 0;
+	height: 0;
+	border-top: 20px solid transparent;
+	border-bottom: 20px solid transparent;
+}
+.arrow:before {
+	top: -2px;
+	width: 0;
+	height: 0;
+	border-top: 20px solid transparent;
+	border-bottom: 20px solid transparent;
+}
+.art_prew {
+	float: left;
+	margin-left: 20px;
+}
+.art_prew:after, .art_prew:before {
+	right: 100%;
+}
+
+.art_prew:after{
+	right: 348px;
+	border-right: 20px solid #ec2e4f;
+}
+.art_prew:before {
+	right: -2px;
+	border-right: 20px solid #fff;
+}
+.art_next {
+	float: right;
+	margin-right: 20px;
+}
+.art_next:after, .art_next:before {
+	left: 100%;
+}
+.art_next:after{
+	left: 348px;
+	border-left: 20px solid #ec2e4f;
+}
+.art_next:before {
+	left: -2px;
+	border-left: 20px solid #fff;
+}
+/* 前后 */
+
+/* 评论 */
 #comments{
 	padding-bottom: 30px;
+	clear: both;
 }
 #comments .article-con .nickname a{
 	color: #00B38C;
@@ -9,7 +94,7 @@
 	color: #b3b3b3;
 }
 .article-con{
-	 border-top: solid 10px #00B38C;
+	 border-top: solid 5px #00B38C;
 	 padding: 5px 20px;
 	 margin: 10px 0;
 }
@@ -68,5 +153,5 @@
 div.content p{
   word-break:break-all;
 }
-/*评论*/
+/* 评论 */
 

@@ -4,11 +4,10 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
-use App\Libs\Consts\Upload;
 use App\Libs\Consts\Error;
 use Maatwebsite\Excel\Facades\Excel;
-
-
+use Michelf;
+use App\Libs\Libs\FileUpload;
 
 class CommonController extends Controller {
 
@@ -19,21 +18,13 @@ class CommonController extends Controller {
 	 */
 	public function load_md_file(Request $request)
 	{
-		$data = '';
-		$msg = '';
-		$status = 0;
-		if (($_FILES["file"]["size"] < 20000)){
-			if ($_FILES["file"]["error"] > 0){
-				$msg = Error::PIC_READ_ERROR;
-			}else{
-				$status = 1;
-				$data = file_get_contents($_FILES["file"]["tmp_name"]);
-			}
-		}else{
-			$msg = Error::PIC_SIZE_ERROR;
-		}
+		$FileUpload = new FileUpload($request);
 
-		$this->json_return($data,$msg,$status);
+		if ($FileUpload->checkFile() === true ) {
+			$this->jsonResponse($FileUpload->getFileContent(),'ok',0);
+		}else{
+			$this->jsonResponse('',$FileUpload->getError(),1);
+		}
 	}
 
 	/**
@@ -43,43 +34,27 @@ class CommonController extends Controller {
 	 */
 	public function upload_pic_link(Request $request)
 	{
-		$pic_type = Upload::UPLOAD_PIC_TYPE;
-		$data = '';
-		$msg = '';
-		$status = 0;
-		if ($_FILES["pic"]["size"] < 20000 && in_array($_FILES["pic"]["type"], $pic_type)){
-			if ($_FILES["pic"]["error"] > 0){
-				$msg = Error::PIC_READ_ERROR;
-			}else{
-				$status = 1;
-				$save_url = Upload::ADMIN_PIC . date('Ymd').(time()/$_FILES["pic"]["size"]).$_FILES["pic"]["name"];
-
-				move_uploaded_file($_FILES["pic"]["tmp_name"],public_path().$save_url);
-				$server = $request->server();
-				$data = $server['HTTP_ORIGIN'].$save_url;
+		$FileUpload = new FileUpload($request);
+		if ($FileUpload->checkFile() === true) {
+			$piclink = $FileUpload->moveFile();
+			if ($piclink != false) {
+				$this->jsonResponse($piclink,'ok',0);
 			}
-		}else{
-			$msg = Error::PIC_SIZE_ERROR.'或'.Error::PIC_TYPE_ERROR;
 		}
-
-		$this->json_return($data,$msg,$status);
+		$this->jsonResponse('',$FileUpload->getError(),1);
 	}
 
-
 	/**
-	 * json返回
-	 * @param  [type]  $data   [description]
-	 * @param  string  $msg    [description]
-	 * @param  integer $status [1 is ok]
-	 * @return [type]          [description]
+	 * MD预览
+	 * @param  string $value [description]
+	 * @return [type]        [description]
 	 */
-	public function json_return($data,$msg='',$status=1)
+	public function preview(Request $request)
 	{
-		header('Content-Type:application/json; charset=utf-8');
-		exit(json_encode([
-			'status'=>$status,
-			'msg'=>$msg,
-			'data'=>$data]));
+		$html_body = Michelf\MarkdownExtra::defaultTransform($request->art_body);
+        // 返回JSON数据格式到客户端 包含状态信息
+        header('Content-Type:application/json; charset=utf-8');
+        exit(json_encode(['html_body'=>$html_body]));
 	}
 
 }

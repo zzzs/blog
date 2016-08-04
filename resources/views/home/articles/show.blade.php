@@ -16,10 +16,30 @@
           {!! $article->html_body !!}
       </div>
       <hr>
+      <h3>推荐文章</h3>
+      <div class="recommend">
+        <a href="">是的方法是看附件是开发商看是的方法是看附件是开发商看</a>
+        <a href="">是的方法是看附件是开发商看是的方法是看附件是开发商看</a>
+        <a href="">是的方法是看附件是开发商看是的方法是看附件是开发商看</a>
+        <a href="">是的方法是看附件是开发商看是的方法是看附件是开发商看</a>
+        <a href="">是的方法是看附件是开发商看是的方法是看附件是开发商看</a>
+      </div>
+      <hr>
+      <!-- 前后页 -->
+      @if (!empty($prew))
+      <a class="arrow art_prew" title="上一篇" href="{{ URL('articles/'.$prew->article_id) }}">{{$prew->title}}</a>
+      @endif
+      @if (!empty($next))
+      <a class="arrow art_next" title="下一篇" href="{{ URL('articles/'.$next->article_id) }}">{{$next->title}}</a>
+      @endif
 
+      <!-- <div class="art_next">shfh还是开发还是看得很舒服还是</div> -->
+
+
+      <hr style="clear:both;">
       <!-- 评论 -->
       <div id="comments">
-        <h3>评论</h3>
+        <h3>相关评论</h3>
 
         <!-- 发表评论 -->
         <div class="modal fade bs-example-modal-lg" id="commentModal" tabindex="-1" role="dialog" aria-labelledby="commentModalLabel" data-backdrop="false">
@@ -112,10 +132,10 @@
         url: com_form.attr( 'action' ),
         data: com_form.serialize(),
         success: function( ret ) {
-          if (ret.status == 1) {
-            success_confirm(ret.msg,3000);
-          }else{
+          if (ret.status == 0) {
             error_confirm(ret.msg,3000);
+          }else{
+            success_confirm(ret.msg,3000);
           }
         }
       });
@@ -126,6 +146,8 @@
     $.each(contents, function( index, value ) {
       createContentElement('comments',value);
     });
+
+    $('.article-con').eq(0).css("border-top","solid 10px #00B38C");
 
   </script>
 @endsection

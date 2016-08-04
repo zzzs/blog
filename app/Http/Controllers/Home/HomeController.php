@@ -10,32 +10,32 @@ use App\Libs\Enums\TagType;
 
 class HomeController extends BaseController {
 
-	public function index()
+	//文章列表
+	public function index(Request $request)
 	{
-		//文章
-		$articles = Article::paginate(10);
-		$base_data = $this->base_index();
-		return view('Home.home',['article_lists'=>$articles]+$base_data);
-	}
+		$articles = Article::select();
 
-	/**
-	 * xx类下的文章
-	 * @param  [type] $id [description]
-	 * @return [type]     [description]
-	 */
-	public function articles($id)
-	{
-		$articles = Article::where('cate_id','=',$id)->get()->toArray();
-		$base_data = $this->base_index();
-		return view('Home.home',['article_lists'=>$articles]+$base_data);
-	}
+		if (!empty($request->title)) {
+			$articles->where('title','like','%'.$request->title.'%');
+		}
+		if (!empty($request->cate)) {
+			$articles->where('cate_id',$request->cate);
+		}
+		//默认分页
+		if ($request->nopage) {
+			$articles = $articles->get();
+		}else{
+			$limit = $request->input('limit',10);
+			$articles = $articles->paginate($limit);
+		}
 
-	public function search(Request $request)
-	{
-		$articles = Article::where('title','like','%'.$request->content.'%')
-		->get()->toArray();
+		if ($request->ajax())
+		{
+	    	return $articles;
+		}
+
 		$base_data = $this->base_index();
-		return view('Home.home',['article_lists'=>$articles,'search'=>$request->content]+$base_data);
+		return view('Home.home',['article_lists'=>$articles,'meta_desc'=>'我们俩永远在一起']+$base_data);
 	}
 
 }

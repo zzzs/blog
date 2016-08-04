@@ -66,7 +66,7 @@
                 <button id="icon-wrench" type="button" title="代码(Ctrl+K)" class="btn btn-default" data-hotkey="75"><i class="glyphicon glyphicon-wrench"></i></button>
                 <button id="icon-comment" type="button" title="引用(Ctrl+Q)" class="btn btn-default" data-hotkey="81"><i class="glyphicon glyphicon-comment"></i></button>
                 <button id="icon-open" type="button" title="上传(Ctrl+F)" class="btn btn-default" data-hotkey="70"><i class="glyphicon glyphicon-open"></i></button>
-                <button id="icon-download-alt" type="button" title="下载(Ctrl+D)" class="btn btn-default" data-hotkey="68"><i class="glyphicon glyphicon-download-alt"></i></button>
+                <!-- <button id="icon-download-alt" type="button" title="下载(Ctrl+D)" class="btn btn-default" data-hotkey="68"><i class="glyphicon glyphicon-download-alt"></i></button> -->
                 <button id="icon-remove" type="button" title="清空(Ctrl+M)" class="btn btn-default" data-hotkey="77"><i class="glyphicon glyphicon-remove"></i></button>
                 <button data-toggle="modal" data-target="#helpModal" id="icon-question-sign" type="button" title="帮助" class="btn btn-default"><i class="glyphicon glyphicon-question-sign"></i></button>
               </div>
@@ -83,7 +83,7 @@
         </form>
         <!-- OPEN MD FORM -->
         <form type="hidden" enctype="multipart/form-data" method="post" id="openfileform">
-          <input style="display:none" id="openfile" type="file" name="file" multiple="multiple"/>
+          <input style="display:none" id="openfile" type="file" name="mdfile" multiple="multiple"/>
           <input type="hidden" name="_token" value="{{ csrf_token() }}">
         </form>
         <!-- OPEN MD FORM -->
@@ -117,12 +117,12 @@
         <!-- previewModal -->
 
         <!-- helpModal -->
-        <div class="modal fade bs-example-modal-lg" id="helpModal" tabindex="-1" role="dialog" aria-labelledby="previewModalLabel" data-backdrop="false">
+        <div class="modal fade bs-example-modal-lg" id="helpModal" tabindex="-1" role="dialog" aria-labelledby="helpModalLabel" data-backdrop="false">
           <div class="modal-dialog" role="document">
             <div class="modal-content">
               <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 style="text-align: center;" class="modal-title" id="previewModalLabel">帮助</h4>
+                <h4 style="text-align: center;" class="modal-title" id="helpModalLabel">帮助</h4>
               </div>
               <div class="modal-body">
                 <ul class="list-group">
@@ -177,12 +177,12 @@
                       <i class="glyphicon glyphicon-open"></i>
                       <span>上传</span>
                       <span class="badge">Ctrl+F</span>
-                    </li>
+                    </li><!--
                     <li class="list-group-item">
                       <i class="glyphicon glyphicon-download-alt"></i>
                       <span>下载</span>
                       <span class="badge">Ctrl+D</span>
-                    </li>
+                    </li> -->
                     <li class="list-group-item">
                       <i class="glyphicon glyphicon-remove"></i>
                       <span>清空</span>
@@ -211,7 +211,7 @@
     var art_body = $('textarea#art_body').val();
     var art_title = $("input[name='title']").val();
     $("h4#previewModalLabel").text(art_title);
-    $.post("{{ URL('admin/articles/preview') }}",{
+    $.post("{{ URL('admin/common/preview') }}",{
       art_body:art_body,
       _token:_token
     },function(ret){
@@ -321,7 +321,7 @@
       contentType: false,
       processData: false,
       success:function(ret){
-        if (ret.status == 1) {
+        if (ret.status == 0) {
           var body_con = $("#art_body").val();
           $("#art_body").val(body_con+'![图片替代文字]('+ret.data+')');
         }else{
@@ -346,7 +346,7 @@
       contentType: false,
       processData: false,
       success:function(ret){
-        if (ret.status == 1) {
+        if (ret.status == 0) {
           var body_con = $("#art_body").val();
           $("#art_body").val(body_con+'\n'+ret.data);
         }else{
@@ -359,20 +359,6 @@
     });
     $(this).val("");
   });
-
-
-  /*下载*/
-
-  // $("#md-but button#icon-download-alt").click(function(){
-  //   var body_con = $("#art_body").val();
-  //   // $("#test").attr("href","data:text/txt;charset=utf-8,download Test Data");
-  //   $("#test").click();
-  // });
-  //   $("#test").click(function(){
-  //     $(this).attr("href","data:text/txt;charset=utf-8,download Test Data");
-  //     $(this).attr("download","downlaod.txt");
-  //     $(this).click();
-  //   });
 
   /*富文本编辑*/
 

@@ -4,6 +4,8 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="章显雷,姜帅,我们俩,php,CodeIgniter,Laravel,TinyLara">
+  <meta name="description" content="{{$meta_desc}}">
   <title>{{$website}}</title>
 
 <!--   <link href="{{ asset('/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
@@ -55,9 +57,9 @@
        </div>
 
        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-         <ul class="nav navbar-nav">
+         <ul class="nav navbar-nav main_menus">
            @foreach ($main_menus as $menu)
-           <li><a href="{{ URL('article_list/'.$menu['tag_id']) }}">{{$menu['name']}}<span class="sr-only"></span></a></li>
+           <li><a href="{{ URL('/?cate='.$menu['tag_id']) }}">{{$menu['name']}}<span class="sr-only"></span></a></li>
            @endforeach
            <!-- <li><a href="#">生活</a></li> -->
             <!--  <li class="dropdown">
@@ -73,10 +75,9 @@
                </ul>
              </li> -->
            </ul>
-           <form action="{{ URL('article_search') }}" method="POST" class="navbar-form navbar-left" role="search">
-             <input type="hidden" name="_token" value="{{ csrf_token() }}">
+           <form action="{{ URL('/') }}" method="GET" class="navbar-form navbar-left" role="search">
              <div class="form-group">
-             <input type="text" name="content" class="form-control" placeholder="i want mac pro 15" value="{{$search or ''}}">
+             <input type="text" name="title" class="form-control" placeholder="i want mac pro 15" value="{{$search or ''}}">
              </div>
              <button type="submit" class="btn btn-default">GO</button>
            </form>

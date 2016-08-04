@@ -101,13 +101,13 @@
         _token:_token
       },function(ret){
         if (ret.status == 0) {
-          error_confirm(ret.msg,3000);
-        }else{
           $("#con-"+comid).fadeTo("slow", 0.01,function(){
             $("#con-"+comid).slideUp("fast", function(){
               $("#con-"+comid).remove();
             });
           });
+        }else{
+          error_confirm(ret.msg,3000);
         }
       });
     }
@@ -128,12 +128,12 @@
         status:1
       },function(ret){
         if (ret.status == 0) {
-          error_confirm(ret.msg,3000);
-        }else{
           $("#con-"+comid).fadeOut("slow",function(){
             $("#con-"+comid).find('a.check_com').remove();
             $("#con-"+comid).removeClass('comment_wait').fadeIn(100);
           });
+        }else{
+          error_confirm(ret.msg,3000);
         }
       });
     },
@@ -144,13 +144,13 @@
         status:2
       },function(ret){
         if (ret.status == 0) {
-          error_confirm(ret.msg,3000);
-        }else{
           $("#con-"+comid).fadeTo("slow", 0.01,function(){
             $("#con-"+comid).slideUp("fast", function(){
               $("#con-"+comid).remove();
             });
           });
+        }else{
+          error_confirm(ret.msg,3000);
         }
       });
     }
@@ -190,7 +190,7 @@
       url: com_form.attr( 'action' ),
       data: com_form.serialize(),
       success: function( ret ) {
-        if (ret.status == 1) {
+        if (ret.status == 0) {
           createContentElement('comments',ret.data);
           $('#con-'+ret.data.comment_id).find('.reply').append("<a class='del_com'>删除</a>");
         }else{

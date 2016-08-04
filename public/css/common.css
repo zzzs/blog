@@ -62,3 +62,7 @@
 	margin: 1.2em 0!important;
 }
 /* =====MD===== */
+
+.modal-title{
+	text-align: center;
+}
