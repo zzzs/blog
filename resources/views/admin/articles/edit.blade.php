@@ -1,4 +1,4 @@
-@extends('admin.app')
+@extends('_layouts.adminbase')
 
 @section('content')
 <div class="container">
@@ -211,7 +211,7 @@
     var art_body = $('textarea#art_body').val();
     var art_title = $("input[name='title']").val();
     $("h4#previewModalLabel").text(art_title);
-    $.post("{{ URL('admin/common/preview') }}",{
+    $.post("{{ URL('common/preview') }}",{
       art_body:art_body,
       _token:_token
     },function(ret){
@@ -314,7 +314,7 @@
   $("#openpic").change(function(){
     var data = new FormData(document.getElementById("openpicform"));
     $.ajax({
-      url:"{{ URL('admin/common/upload_pic') }}",
+      url:"{{ URL('common/upload_pic') }}",
       type:'POST',
       data:data,
       cache: false,
@@ -339,7 +339,7 @@
   $("#openfile").change(function(){
     var data = new FormData(document.getElementById("openfileform"));
     $.ajax({
-      url:"{{ URL('admin/common/load_md') }}",
+      url:"{{ URL('common/load_md') }}",
       type:'POST',
       data:data,
       cache: false,

@@ -1,4 +1,5 @@
-@extends('admin.app')
+@extends('_layouts.adminbase')
+
 @section('content')
 <div class="container">
   <div class="row">
@@ -40,9 +41,8 @@
           <table class="table table-striped table-hover" style="table-layout:fixed;">
             <tr class="row">
               <th class="col-lg-1">文章ID</th>
-              <th class="col-lg-4">标题</th>
-              <th class="col-lg-1">分类</th>
-              <th class="col-lg-2">内容</th>
+              <th class="col-lg-5">标题</th>
+              <th class="col-lg-2">分类</th>
               <th class="col-lg-1">推荐</th>
               <th class="col-lg-1">评论</th>
               <th class="col-lg-1">编辑</th>
@@ -54,14 +54,11 @@
               <td class="col-lg-1">
                 {{ $article->article_id }}
               </td>
-              <td class="col-lg-4">
+              <td class="col-lg-5">
                 {{ $article->title }}
               </td>
-              <td class="col-lg-1">
+              <td class="col-lg-2">
                 {{ $article->Tag->name }}
-              </td>
-              <td  class="col-lg-2">
-                {{ $article->body }}
               </td>
               <td  class="col-lg-1">
                 <a href="{{ URL('admin/articles/recommends/'.$article->article_id) }}" class="btn btn-xs btn-default">{{ count($article->recommends) }}</a>
@@ -89,14 +86,11 @@
               <td class="col-lg-1">
                 <del>{{ $article->article_id }}</del>
               </td>
-              <td class="col-lg-4">
+              <td class="col-lg-5">
                 <del>{{ $article->title }}</del>
               </td>
-              <td class="col-lg-1">
-                {{ $article->Tag->name }}
-              </td>
               <td class="col-lg-2">
-                {{ $article->body }}
+                {{ $article->Tag->name }}
               </td>
               <td  class="col-lg-1">
                 <a href="{{ URL('admin/articles/recommends/'.$article->article_id) }}" class="btn btn-xs btn-default">{{ count($article->recommends) }}</a>

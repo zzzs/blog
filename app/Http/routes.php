@@ -65,11 +65,12 @@ Route::group(['prefix' => 'admin', 'middleware'=>'auth', 'namespace' => 'Admin']
 	//标签
 	Route::resource('tags', 'TagsController');
 
-	//公共
-	Route::group(['prefix' => 'common'], function()
-	{
-		Route::post( 'upload_pic', [ 'as' => '加载图片链接', 'uses' => 'CommonController@upload_pic_link'] );
-		Route::post( 'load_md', [ 'as' => '加载MD文件', 'uses' => 'CommonController@load_md_file'] );
-		Route::post( 'preview', [ 'as' => '文章预览', 'uses' => 'CommonController@preview'] );
-	});
+});
+
+//公共
+Route::group(['prefix' => 'common'], function()
+{
+	Route::post( 'upload_pic', [ 'as' => '加载图片链接', 'uses' => 'CommonController@upload_pic_link'] );
+	Route::post( 'load_md', [ 'as' => '加载MD文件', 'uses' => 'CommonController@load_md_file'] );
+	Route::post( 'preview', [ 'as' => '文章预览', 'uses' => 'CommonController@preview'] );
 });

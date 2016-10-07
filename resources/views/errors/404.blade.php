@@ -44,7 +44,7 @@
 		<div class="container">
 			<div class="content">
 				<div class="title">DON'T LEAVE! <a href="/">COME BACK</a></div>
-				<span>WELL!&nbsp&nbspIT'S 404</span>
+				<span>WELL!&nbspIT'S 404</span>
 			</div>
 		</div>
 	</body>

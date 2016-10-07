@@ -25,4 +25,6 @@ class Error
 	CONST COMMENT_PUBLISH_SUCCESS = '发表成功，待审核中...';
 	CONST COMMENT_HAS_CHILD = '删除失败，请先删除回复发评论';
 
+	/*访客*/
+	CONST ExistGuestinfo = '访客信息已存在';
 }

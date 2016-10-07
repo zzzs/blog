@@ -184,7 +184,11 @@ class ArticlesController extends Controller {
 	{
 		$article = Article::select('article_id','title','html_body')
 		->with(['Comments'=>function($q){
-			$q->where('status','<>',2)->orderByRaw('pid,created_at');
+			$q->where('status','<>',2)
+				->with(['Guest'=>function($q){
+                        $q->select('id', 'nickname', 'website');
+                    }])
+				->orderByRaw('pid,created_at');
 		}])->find($id);
 
 		return view('admin.articles.comments')->withArticle($article);

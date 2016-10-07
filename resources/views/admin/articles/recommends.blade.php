@@ -1,7 +1,7 @@
-@extends('admin.app')
+@extends('_layouts.adminbase')
 
 @section('content')
-<link href="{{ asset('/css/admin/article.css') }}" rel="stylesheet">
+<link href="{{ asset('/css/admin/articles.css') }}" rel="stylesheet">
 <div class="container">
   <div class="row">
     <div class="panel panel-default">
