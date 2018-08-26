@@ -1,0 +1,40 @@
+@import "../base.less";
+
+div.content p{
+  word-break:break-all;
+}
+.article-con{
+	border-top: solid 10px @theme-green-color;
+	padding: 5px 20px;
+	margin: 10px 0;
+	.nickname a{
+		color: @theme-green-color;
+	}
+	.content p{
+		padding: 20px;
+		margin-bottom: 0;
+	}
+	.reply{
+		text-align: right;
+		padding: 5px 40px;
+		a{
+			color: @theme-green-color;
+			font-size: 14px;
+			cursor: pointer;
+			margin-left: 10px;
+			&:hover {
+				color: @theme-green-color;
+			}
+		}
+	}
+}
+.article-con-child{
+  padding: 5px 0 0 10px;
+  margin: 10px 5px 5px 0px;
+  border: 1px dashed @theme-green-color;
+  border-left: 3px solid @theme-green-color;
+}
+.comment_wait{
+  border: 1px dashed @theme-red-color;
+  border-left: 3px solid @theme-red-color;
+}

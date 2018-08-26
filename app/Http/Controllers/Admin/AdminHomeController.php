@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 use App\Models\Article;
 
-class AdminHomeController extends Controller {
+class AdminHomeController extends BaseController {
 
 	/**
 	 * Display a listing of the resource.

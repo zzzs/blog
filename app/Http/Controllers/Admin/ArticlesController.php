@@ -1,19 +1,20 @@
 <?php namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests;
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\Admin\BaseController;
 
 use Illuminate\Http\Request;
 
 use App\Models\Article;
 use App\Models\Tag;
+use App\Models\Recommend;
 use App\Libs\Enums\TagType;
 use App\Libs\Consts\Error;
 use Michelf;
 
 use Redirect, Input, Auth, DB;
 
-class ArticlesController extends Controller {
+class ArticlesController extends BaseController {
 
 	/**
 	 * Display a listing of the resource.
@@ -22,12 +23,11 @@ class ArticlesController extends Controller {
 	 */
 	public function index(Request $request)
 	{
-
 		$cates = Tag::select('tag_id','name')
 		->where('type',TagType::MAIN_MENU)
 		->get();
-		$articles = Article::withTrashed();
 
+		$articles = Article::withTrashed();
 		if (($request->cate)) {
 			$tag_id = $request->cate;
 			$articles->whereHas('Tag',function($q)use($tag_id){
@@ -42,13 +42,18 @@ class ArticlesController extends Controller {
 			});
 		}
 
-		if ($request->title) {
+		if (!empty($request->title)) {
 			$articles->where('title','like','%'.$request->title.'%');
 		}
 
-		$articles = $articles->with(['Tag'=>function($q){
-			$q->select('tag_id','name');
-		}])->paginate(15);
+		$articles = $articles->with([
+			'Tag'=>function($q){
+				$q->select('tag_id','name');
+			},
+			'Recommends'=>function($q){
+				$q->select('articles.article_id');
+			},
+		])->paginate(15);
 
 		return view('admin.articles.index',[
 			'articles'=>$articles,
@@ -68,19 +73,6 @@ class ArticlesController extends Controller {
 		->where('type',TagType::MAIN_MENU)
 		->get();
 		return view('admin.articles.create',['cates'=>$cates]);
-	}
-
-	/**
-	 * 预览
-	 * @param  string $value [description]
-	 * @return [type]        [description]
-	 */
-	public function preview(Request $request)
-	{
-		$html_body = Michelf\MarkdownExtra::defaultTransform($request->art_body);
-        // 返回JSON数据格式到客户端 包含状态信息
-        header('Content-Type:application/json; charset=utf-8');
-        exit(json_encode(['html_body'=>$html_body]));
 	}
 
 	/**
@@ -192,10 +184,52 @@ class ArticlesController extends Controller {
 	{
 		$article = Article::select('article_id','title','html_body')
 		->with(['Comments'=>function($q){
-			$q->where('status','<>',2)->orderByRaw('pid,created_at');
+			$q->where('status','<>',2)
+				->with(['Guest'=>function($q){
+                        $q->select('id', 'nickname', 'website');
+                    }])
+				->orderByRaw('pid,created_at');
 		}])->find($id);
 
 		return view('admin.articles.comments')->withArticle($article);
 	}
 
+	/**
+	 * 查看推荐
+	 * @param  string $value [description]
+	 * @return [type]        [description]
+	 */
+	public function show_recommends($id)
+	{
+		$article = Article::select('article_id','title','html_body','cate_id')
+		->with('Recommends')->find($id);
+		return view('admin.articles.recommends')->withArticle($article);
+	}
+
+	/**
+	 * 未被推荐的文章
+	 * @param  string $value [description]
+	 * @return [type]        [description]
+	 */
+	public function not_recommends(Request $request,$id)
+	{
+		$recom_art_ids = Recommend::where('article_id',$id)->lists('re_article_id');
+		$recom_art_ids[] = $id;
+
+		$articles = Article::whereNotIn('article_id',$recom_art_ids);
+		if (($request->cate)) {
+			$tag_id = $request->cate;
+			$articles->whereHas('Tag',function($q)use($tag_id){
+				$q->where('tag_id',$tag_id);
+			});
+		}
+
+		if (!empty($request->title)) {
+			$articles->where('title','like','%'.$request->title.'%');
+		}
+
+		$articles = $articles->get();
+
+		return $this->jsonResponse($articles);
+	}
 }

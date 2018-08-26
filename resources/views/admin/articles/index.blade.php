@@ -1,4 +1,5 @@
-@extends('admin.app')
+@extends('_layouts.adminbase')
+
 @section('content')
 <div class="container">
   <div class="row">
@@ -37,12 +38,12 @@
         </div>
 
         <div class="panel-body">
-          <table class="table table-striped" style="table-layout:fixed">
+          <table class="table table-striped table-hover" style="table-layout:fixed;">
             <tr class="row">
               <th class="col-lg-1">文章ID</th>
               <th class="col-lg-5">标题</th>
-              <th class="col-lg-1">分类</th>
-              <th class="col-lg-2">内容</th>
+              <th class="col-lg-2">分类</th>
+              <th class="col-lg-1">推荐</th>
               <th class="col-lg-1">评论</th>
               <th class="col-lg-1">编辑</th>
               <th class="col-lg-1">删除</th>
@@ -56,11 +57,11 @@
               <td class="col-lg-5">
                 {{ $article->title }}
               </td>
-              <td class="col-lg-1">
+              <td class="col-lg-2">
                 {{ $article->Tag->name }}
               </td>
-              <td  class="col-lg-2">
-                {{ $article->body }}
+              <td  class="col-lg-1">
+                <a href="{{ URL('admin/articles/recommends/'.$article->article_id) }}" class="btn btn-xs btn-default">{{ count($article->recommends) }}</a>
               </td>
               <td class="col-lg-1">
                 @if (count($article->comments->toArray()) > 0)
@@ -88,14 +89,14 @@
               <td class="col-lg-5">
                 <del>{{ $article->title }}</del>
               </td>
-              <td class="col-lg-1">
+              <td class="col-lg-2">
                 {{ $article->Tag->name }}
               </td>
-              <td class="col-lg-2">
-                {{ $article->body }}
+              <td  class="col-lg-1">
+                <a href="{{ URL('admin/articles/recommends/'.$article->article_id) }}" class="btn btn-xs btn-default">{{ count($article->recommends) }}</a>
               </td>
               <td class="col-lg-1">
-                @if (count($article->comments->toArray()) > 0)
+                @if ( $article->article_id > 0)
                 <a href="{{ URL('admin/articles/comments/'.$article->article_id) }}" class="btn btn-xs btn-info">查看</a>
                 @else
                 <del>冷门</del>
@@ -124,7 +125,7 @@
   {!! $articles->render() !!}
 </center>
 <script>
-var comstatus = {{ $request['comstatus'] or '' }};
+var comstatus = "{{ $request['comstatus'] or '' }}";
 if (comstatus.length !== 0) {
   $("form select[name='comstatus']").find("option[value="+comstatus+"]").attr('selected','selected');
 }

@@ -1,7 +1,7 @@
 <?php namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests;
-use App\Http\Controllers\Admin\CommonController;
+use App\Http\Controllers\Admin\BaseController;
 
 use Illuminate\Http\Request;
 
@@ -10,14 +10,14 @@ use App\Models\Article;
 use App\Libs\Consts\Error;
 use Redirect, Input;
 
-class CommentsController extends CommonController {
+class CommentsController extends BaseController {
 
 	public function store()
 	{
 		if ($ret = Comment::create(Input::except(['_token']))) {
-			$this->json_return($ret->toArray());
+			$this->jsonResponse($ret->toArray());
 		} else {
-			$this->json_return('',Error::COMMENT_PUBLISH_ERROR,0);
+			$this->jsonResponse('',Error::COMMENT_PUBLISH_ERROR,1);
 		}
 	}
 
@@ -45,10 +45,10 @@ class CommentsController extends CommonController {
 		//判断若有人评论，则不准删
 		if(count($comment->HasMe->toArray()) != 0){
 			$msg = Error::COMMENT_HAS_CHILD;
-			$this->json_return('',$msg,0);
+			$this->jsonResponse('',$msg,1);
 		}else{
 			$comment->delete();
-			$this->json_return('');
+			$this->jsonResponse('');
 		}
 	}
 
@@ -65,13 +65,13 @@ class CommentsController extends CommonController {
 		]);
 		$comment = Comment::find($id);
 		if (empty($comment)) {
-			$this->json_return('',Error::NOT_EXIST_RECODE,0);
+			$this->jsonResponse('',Error::NOT_EXIST_RECODE,1);
 		}
 		$data = Input::except(['_method', '_token']);
 		if ($comment->update($data)) {
-			$this->json_return('');
+			$this->jsonResponse('');
 		} else {
-			$this->json_return('',Error::UPDATE_ERROR,0);
+			$this->jsonResponse('',Error::UPDATE_ERROR,1);
 		}
 	}
 }

@@ -10,6 +10,7 @@ class Article extends Model {
 
 	protected $table = 'articles';
 	protected $primaryKey = 'article_id';
+    protected $guarded = ['article_id'];
     // 定义软删除的字段
     const DELETED_AT = 'is_del';
     // 配合 App\Traits\SoftDeletes
@@ -36,5 +37,11 @@ class Article extends Model {
 	{
 		return $this->hasOne('App\Models\Tag', 'tag_id', 'cate_id');
 	}
+
+    public function Recommends()
+    {
+        return $this->belongsToMany($this, 'recommends', 'article_id', 're_article_id')
+        ->withPivot('recommend_id');
+    }
 
 }
