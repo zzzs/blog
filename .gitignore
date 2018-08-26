@@ -1,9 +1,6 @@
 /vendor
 /node_modules
 .env
-composer.json
 composer.lock
 someelse.txt
-/public/css
-/public/js
 
