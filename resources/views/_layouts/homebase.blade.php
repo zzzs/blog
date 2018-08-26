@@ -2,9 +2,10 @@
 <html lang="zh-CN">
 <head>
   <meta charset="utf-8">
+  <meta name="baidu-site-verification" content="wPG9YCCs3g" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="keywords" content="章显雷,姜帅,我们俩,php,CodeIgniter,Laravel,TinyLara">
+  <meta name="keywords" content="章显雷,我们俩,php,CodeIgniter,Laravel,TinyLara">
   <meta name="description" content="{{$meta_desc}}">
   <link rel="shortcut  icon" type="image/x-icon" href="{{ asset('/image/favicon16.ico') }}" media="screen"  />
   <title>{{$website}}</title>
@@ -32,7 +33,7 @@
   <!-- head -->
   <div id="head">
     <!-- <div id="title"> -->
-    <!-- <h1>{{$website}}</h1> -->
+    <p class="website">{{$website}}</p>
     <h3>{{$motto}}</h3><!-- {{ Inspiring::quote() }} -->
     <!-- </div> -->
   </div>
@@ -61,7 +62,7 @@
             </ul>
             <form action="{{ URL('/') }}" method="GET" class="navbar-form navbar-left" role="search">
               <div class="form-group">
-                <input type="text" name="title" class="form-control" placeholder="搜搜我们俩" value="{{$search or ''}}">
+                <input type="text" name="title" class="form-control" placeholder="搜一搜" value="{{$search or ''}}">
               </div>
               <button type="submit" class="btn btn-default">搜搜</button>
             </form>
@@ -86,7 +87,7 @@
         <a target="_blank" href="{{$love_link['extra']}}">{{$love_link['name']}}</a>
         @endforeach
       </div>
-      ©2016.06-{!! date('Y.m') !!}<a href="/" class="xl">Xl</a>
+      ©2016.06-{!! date('Y.m') !!} <a href="/" class="xl">Xl</a> <a href="http://www.miibeian.gov.cn/" target="_brank" class="xl">浙ICP备16037643号</a>
     </div>
   </div>
 

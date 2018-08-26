@@ -1,7 +1,7 @@
 <?php namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests;
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\Admin\BaseController;
 
 use Illuminate\Http\Request;
 
@@ -14,7 +14,7 @@ use Michelf;
 
 use Redirect, Input, Auth, DB;
 
-class ArticlesController extends Controller {
+class ArticlesController extends BaseController {
 
 	/**
 	 * Display a listing of the resource.

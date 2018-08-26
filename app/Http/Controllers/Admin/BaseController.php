@@ -1,9 +1,14 @@
 <?php namespace App\Http\Controllers\Admin;
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\CommonController;
 use Illuminate\Http\Request;
 
-class BaseController extends Controller
+class BaseController extends CommonController
 {
+	public function __construct()
+	{
+		$this->shareCookie();
+	}
+
 	public function base_index($where=[])
 	{
 		//搜索

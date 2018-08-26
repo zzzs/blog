@@ -35,7 +35,7 @@ class HomeController extends BaseController {
 		}
 
 		$base_data = $this->base_index();
-		return view('Home.home',['article_lists'=>$articles,'meta_desc'=>'我们俩永远在一起']+$base_data);
+		return view('home.home',['article_lists'=>$articles,'meta_desc'=>'我们俩永远在一起']+$base_data);
 	}
 
 }

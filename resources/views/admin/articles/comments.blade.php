@@ -39,10 +39,11 @@
                     <input type="hidden" name="article_id" value="{{ $article->article_id }}">
                     <input type="hidden" name="pid" value="0">
                     <input type="hidden" name="status" value="1">
+
                     <div class="form-group">
-                        <label class="col-sm-1 control-label">昵称</label>
+                        <label class="col-sm-1 control-label">花名</label>
                         <div class="col-sm-11">
-                            <input type="text" name="nickname" class="form-control" placeholder="你的昵称" required="required">
+                            <input type="text" name="nickname" class="form-control" placeholder="你的昵称" value="{{ $guest['nickname'] }}" required="required">
                         </div>
                     </div>
                     <div class="form-group">

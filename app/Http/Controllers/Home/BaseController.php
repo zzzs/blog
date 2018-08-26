@@ -1,30 +1,15 @@
 <?php namespace App\Http\Controllers\Home;
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\CommonController;
 use App\Models\Tag;
 use App\Models\Guest;
 use App\Libs\Enums\TagType;
 use Illuminate\Http\Request;
 
-class BaseController extends Controller
+class BaseController extends CommonController
 {
 	public function base_index($where=[])
 	{
-		if (empty($_COOKIE['user'])) {
-			$ip = $_SERVER['REMOTE_ADDR'];
-			$guest = Guest::select('id', 'nickname', 'email', 'website')->where('ip', $ip)->first();
-
-			if (empty($guest)) {
-				$guest = ['id'=>'', 'nickname'=> '','email'=> '','website'=> ''];
-			} else {
-				$guest = $guest->toArray();
-				setcookie ("user", json_encode($guest), time() + 30*86400, '/');
-			}
-
-		} else {
-			$guest = json_decode($_COOKIE['user'] ,true);
-		}
-		view()->share('guest', $guest, true);
-
+		$this->shareCookie();
 		//主菜单
 		$main_menus = Tag::whereHas('TagType',function($q){
 			$q->whereNotNull('id');

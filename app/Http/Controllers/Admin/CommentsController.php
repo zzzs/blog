@@ -1,7 +1,7 @@
 <?php namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests;
-use App\Http\Controllers\CommonController;
+use App\Http\Controllers\Admin\BaseController;
 
 use Illuminate\Http\Request;
 
@@ -10,7 +10,7 @@ use App\Models\Article;
 use App\Libs\Consts\Error;
 use Redirect, Input;
 
-class CommentsController extends CommonController {
+class CommentsController extends BaseController {
 
 	public function store()
 	{

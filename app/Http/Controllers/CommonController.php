@@ -8,6 +8,7 @@ use App\Libs\Consts\Error;
 use Maatwebsite\Excel\Facades\Excel;
 use Michelf;
 use App\Libs\Libs\FileUpload;
+use App\Models\Guest;
 
 class CommonController extends Controller {
 
@@ -55,6 +56,26 @@ class CommonController extends Controller {
         // 返回JSON数据格式到客户端 包含状态信息
         header('Content-Type:application/json; charset=utf-8');
         exit(json_encode(['html_body'=>$html_body]));
+	}
+
+	protected function shareCookie()
+	{
+		if (empty($_COOKIE['user'])) {
+			$ip = $_SERVER['REMOTE_ADDR'];
+			$guest = Guest::select('id', 'nickname', 'email', 'website')->where('ip', $ip)->first();
+
+			if (empty($guest)) {
+				$guest = ['id'=>'', 'nickname'=> '','email'=> '','website'=> ''];
+			} else {
+				$guest = $guest->toArray();
+				setcookie ("user", json_encode($guest), time() + 30*86400, '/');
+			}
+
+		} else {
+			$guest = json_decode($_COOKIE['user'] ,true);
+		}
+		view()->share('guest', $guest, true);
+
 	}
 
 }
