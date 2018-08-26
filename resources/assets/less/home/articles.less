@@ -1,0 +1,155 @@
+@import "../base.less";
+/* 推荐 */
+.recommend{
+	padding: 20px;
+	font-size: 16px;
+	border: 1px dashed @theme-red-color;
+	border-top: 10px solid @theme-red-color;
+	a{
+		display: block;
+		padding: 7px;
+		color: #393938;
+		&:hover{
+			color: #333;
+		}
+	}
+}
+/* 推荐 */
+
+/* 前后 */
+.arrow{
+	width: 350px;
+	height: 40px;
+	background-color: @theme-red-color;
+	position: relative;
+	border: 2px solid @theme-red-color;
+	text-align: center;
+	line-height: 35px;
+	text-overflow: ellipsis;
+	color: #fff;
+	font-size: 12px;
+	margin-bottom: 20px;
+	&:hover{
+		color: #fff;
+	}
+	&:after,&:before {
+		border: solid transparent;
+		content: ' ';
+		height: 0;
+		position: absolute;
+		width: 0;
+		top: -2px;
+		width: 0;
+		height: 0;
+		border-top: 20px solid transparent;
+		border-bottom: 20px solid transparent;
+	}
+
+}
+.art_prew {
+	float: left;
+	margin-left: 20px;
+	&:after, &:before {
+		right: 100%;
+	}
+	&:after{
+		right: 348px;
+		border-right: 20px solid @theme-red-color;
+	}
+	&:before {
+		right: -2px;
+		border-right: 20px solid #fff;
+	}
+}
+.art_next {
+	float: right;
+	margin-right: 20px;
+	&:after, &:before {
+		left: 100%;
+	}
+	&:after{
+		left: 348px;
+		border-left: 20px solid @theme-red-color;
+	}
+	&:before {
+		left: -2px;
+		border-left: 20px solid #fff;
+	}
+}
+/* 前后 */
+
+/* 评论 */
+#comments{
+	padding-bottom: 30px;
+	clear: both;
+	.article-con{
+		border-top: solid 5px @theme-green-color;
+		padding: 5px 20px;
+		margin: 10px 0;
+		.nickname a{
+			color: @theme-green-color;
+		}
+		.content p{
+			padding: 20px;
+			margin-bottom: 0;
+		}
+		.reply{
+			text-align: right;
+			padding: 5px 40px;
+			a{
+				color: @theme-green-color;
+				font-size: 16px;
+				cursor: pointer;
+				&:hover {
+					color: @theme-green-color;
+				}
+			}
+		}
+	}
+	.article-con-child{
+		padding: 5px 0 0 10px;
+		margin: 10px 5px 5px 0px;
+		border: 1px dashed @theme-green-color;
+		border-left: 3px solid @theme-green-color;
+	}
+	h6{
+		color: #b3b3b3;
+	}
+}
+
+#publish{
+	background-color: @theme-red-color;
+	padding: 10px;
+	text-align: center;
+	width: 100%;
+	cursor: pointer;
+	a,#publish a:hover{
+		width: 100%;
+		display: inline-block;
+		cursor: pointer;
+		color: #fff;
+		opacity: 1;
+	}
+}
+#commentModal {
+	.modal-header{
+		background-color: @theme-red-color;
+		color: #fff;
+		border-bottom: none;
+		border-radius: 5px 5px 0 0;
+		span{
+			color: #fff;
+			text-shadow: none;
+			line-height: 1.4;
+		}
+	}
+	.modal-footer #submit_but{
+		background-color: @theme-green-color;
+		color: #fff;
+	}
+}
+div.content p{
+	word-break:break-all;
+}
+/* 评论 */
+

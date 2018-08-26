@@ -10,16 +10,17 @@ class Comment extends Model {
 	protected $table = 'comments';
 	protected $primaryKey = 'comment_id';
 
-	protected $fillable = ['nickname', 'email', 'website', 'content', 'article_id', 'pid'];
+	protected $guarded = ['comment_id'];
 
     // 定义软删除的字段
 	const DELETED_AT = 'is_del';
     // 配合 App\Traits\SoftDeletes
     const DELETED_SIGN = 1; // 已软删除标记,默认1
     const NOT_DELETED_SIGN = 0; // 未软删除标记,默认0
-    protected function getDateFormat()
+
+    public function getCreatedAtAttribute($value)
     {
-        return 'U';
+        return date('Y-m-d', strtotime($value));
     }
 
 	public function HasMe()
@@ -27,4 +28,8 @@ class Comment extends Model {
 		return $this->hasMany($this, 'pid', 'comment_id');
 	}
 
+	public function Guest()
+	{
+		return $this->hasOne('App\Models\Guest', 'id', 'gid');
+	}
 }

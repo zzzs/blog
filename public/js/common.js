@@ -1,3 +1,59 @@
+/**
+ * 错误对话框
+ * @param  {[type]} msg  [description]
+ * @param  {[type]} time [description]
+ * @return {[type]}      [description]
+ */
+function error_confirm(msg='错误',time=3000) {
+	$.confirm({
+		title: msg,
+		content: false,
+		autoClose: 'cancel|'+time,
+		confirmButton: false,
+		theme: 'black'
+	});
+}
+/**
+ * 成功对话框
+ * @param  {[type]} msg  [description]
+ * @param  {[type]} time [description]
+ * @return {[type]}      [description]
+ */
+function success_confirm(msg='OK',time=3000) {
+	$.confirm({
+		title: false,
+		content: msg,
+		autoClose: 'confirm|'+time,
+		cancelButton: false,
+		theme: 'red'
+	});
+}
+
+function admin_error_confirm(msg='错误',time=3000) {
+	$.confirm({
+		title: msg,
+		content: false,
+		autoClose: 'cancel|'+time,
+		confirmButton: false
+	});
+}
+
+function admin_success_confirm(msg='OK',time=3000) {
+	$.confirm({
+		title: false,
+		content: msg,
+		autoClose: 'confirm|'+time,
+		cancelButton: false,
+		theme: 'white'
+	});
+}
+
+  /**
+   * 创建评论dom
+   * @param  {[type]} comments_id  [description]
+   * @param  {[type]} comment_data [description]
+   * @return {[type]}              [description]
+   */
   function createContentElement(comments_id,comment_data){
   	var nickname_str,content_str;
   	if (comment_data.website != null) {
@@ -25,26 +81,36 @@
   	+comment_data.comment_id
   	+"'>回复</a></div>";
 
-
-  	var comment_item;
+  	var comment_item,comment_wait_class='';
     //第一级
+    if (comment_data.status == 0) {
+      comment_wait_class ='comment_wait';
+    }
     if (comment_data.pid == 0){
     	comment_item = "<div id='con-"
     	+comment_data.comment_id
-    	+"' class='article-con'>"
-    	+content_str
-    	+"</div>";
+    	+"' class='article-con "
+      +comment_wait_class
+      +"'>"
+      +content_str
+      +"</div>";
 
-    	$('#'+comments_id).append(comment_item);
+      $('#'+comments_id).append(comment_item);
     }else{
-
     	comment_item = "<div id='con-"
     	+comment_data.comment_id
-    	+"' class='article-con article-con-child'>"
-    	+content_str
-    	+"</div>";
+    	+"' class='article-con article-con-child "
+      +comment_wait_class
+      +"'>"
+      +content_str
+      +"</div>";
+      if($('#con-'+comment_data.pid).length>0){
+       $('#con-'+comment_data.pid).append(comment_item);
+     }
+   }
+ }
 
-    	$('#con-'+comment_data.pid).append(comment_item);
-    }
-
-}
+$('.modal').on('hide.bs.modal', function (event) {
+	$(this).find(".modal-title").empty();
+	$(this).find(".modal-body").empty();
+});

@@ -1,21 +1,49 @@
-@extends('admin.app')
+@extends('_layouts.adminbase')
 
 @section('content')
 <div class="container">
   <div class="row">
-    <div class="col-md-10 col-md-offset-1">
       <div class="panel panel-default">
-        <div class="panel-heading">文章
-          <a href="{{ URL('admin/articles/create') }}" class="btn btn-xs btn-primary">新增</a>
+        <div class="panel-heading">
+          <form class="form-inline" action="/admin/articles" method="GET">文章管理
+            <div class="form-group">
+              <label class="sr-only">分类</label>
+              <select class="form-control" name="cate">
+                <option value="" selected="selected">全部</option>
+                @foreach ($cates as $cate)
+                  @if (isset($request['cate']) && $cate->tag_id == $request['cate'])
+                  <option value="{{ $cate->tag_id }}" selected="selected">{{ $cate->name }}</option>
+                  @else
+                  <option value="{{ $cate->tag_id }}">{{ $cate->name }}</option>
+                  @endif
+                @endforeach
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="sr-only">评论</label>
+              <select class="form-control" name="comstatus">
+                <option value="" selected="selected">全部</option>
+                <option value="0">待处理</option>
+                <option value="1">通过</option>
+                <option value="2">拒绝</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="sr-only">标题</label>
+              <input type="text" name="title" value="{{ $request['title'] or '' }}" class="form-control" placeholder="标题">
+            </div>
+            <button type="submit" class="btn btn-default">Go</button>
+            <a href="{{ URL('admin/articles/create') }}" class="btn btn-xs btn-primary add_but">新增</a>
+          </form>
         </div>
 
         <div class="panel-body">
-          <table class="table table-striped" style="table-layout:fixed">
+          <table class="table table-striped table-hover" style="table-layout:fixed;">
             <tr class="row">
               <th class="col-lg-1">文章ID</th>
               <th class="col-lg-5">标题</th>
-              <th class="col-lg-1">分类</th>
-              <th class="col-lg-2">内容</th>
+              <th class="col-lg-2">分类</th>
+              <th class="col-lg-1">推荐</th>
               <th class="col-lg-1">评论</th>
               <th class="col-lg-1">编辑</th>
               <th class="col-lg-1">删除</th>
@@ -29,11 +57,11 @@
               <td class="col-lg-5">
                 {{ $article->title }}
               </td>
-              <td class="col-lg-1">
+              <td class="col-lg-2">
                 {{ $article->Tag->name }}
               </td>
-              <td  class="col-lg-2">
-                {{ $article->body }}
+              <td  class="col-lg-1">
+                <a href="{{ URL('admin/articles/recommends/'.$article->article_id) }}" class="btn btn-xs btn-default">{{ count($article->recommends) }}</a>
               </td>
               <td class="col-lg-1">
                 @if (count($article->comments->toArray()) > 0)
@@ -61,14 +89,14 @@
               <td class="col-lg-5">
                 <del>{{ $article->title }}</del>
               </td>
-              <td class="col-lg-1">
+              <td class="col-lg-2">
                 {{ $article->Tag->name }}
               </td>
-              <td class="col-lg-2">
-                {{ $article->body }}
+              <td  class="col-lg-1">
+                <a href="{{ URL('admin/articles/recommends/'.$article->article_id) }}" class="btn btn-xs btn-default">{{ count($article->recommends) }}</a>
               </td>
               <td class="col-lg-1">
-                @if (count($article->comments->toArray()) > 0)
+                @if ( $article->article_id > 0)
                 <a href="{{ URL('admin/articles/comments/'.$article->article_id) }}" class="btn btn-xs btn-info">查看</a>
                 @else
                 <del>冷门</del>
@@ -91,7 +119,15 @@
 
         </div>
       </div>
-    </div>
   </div>
 </div>
+<center>
+  {!! $articles->render() !!}
+</center>
+<script>
+var comstatus = "{{ $request['comstatus'] or '' }}";
+if (comstatus.length !== 0) {
+  $("form select[name='comstatus']").find("option[value="+comstatus+"]").attr('selected','selected');
+}
+</script>
 @endsection

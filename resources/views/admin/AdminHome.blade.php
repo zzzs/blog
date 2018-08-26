@@ -1,4 +1,4 @@
-@extends('admin.app')
+@extends('_layouts.adminbase')
 
 @section('content')
 
@@ -8,9 +8,9 @@
       src: url('digital-7_mono.ttf') format("truetype");
     }
   </style>
-  <link href="{{ asset('/love/love.css') }}" rel="stylesheet">
-  <script type="text/javascript" src="{{ asset('/love/garden.js') }}"></script>
-  <script type="text/javascript" src="{{ asset('/love/functions.js') }}"></script>
+  <link href="{{ asset('/plugins/love/love.css') }}" rel="stylesheet">
+  <script type="text/javascript" src="{{ asset('/plugins/love/garden.js') }}"></script>
+  <script type="text/javascript" src="{{ asset('/plugins/love/functions.js') }}"></script>
 
   <div id="mainDiv">
     <div id="content">
@@ -57,41 +57,5 @@
     </div>
   </div>
 
-  <script type="text/javascript">
-    var offsetX = $("#loveHeart").width() / 2;
-    var offsetY = $("#loveHeart").height() / 2 - 55;
-    var together = new Date();
-    together.setFullYear(2014, 11, 04);
-    together.setHours(20);
-    together.setMinutes(0);
-    together.setSeconds(0);
-    together.setMilliseconds(0);
-
-    if (!document.createElement('canvas').getContext) {
-      var msg = document.createElement("div");
-      msg.id = "errorMsg";
-      msg.innerHTML = "Your browser doesn't support HTML5!<br/>Recommend use Chrome 14+/IE 9+/Firefox 7+/Safari 4+";
-      document.body.appendChild(msg);
-      $("#code").css("display", "none")
-      $("#copyright").css("position", "absolute");
-      $("#copyright").css("bottom", "10px");
-      document.execCommand("stop");
-    } else {
-      setTimeout(function () {
-        startHeartAnimation();
-      }, 5000);//隔5000ms后执行startHeartAnimation（）
-
-      timeElapse(together);
-      setInterval(function () {
-        timeElapse(together);
-      }, 500);
-
-      adjustCodePosition();
-      $("#code").typewriter();
-    }
-  </script>
-<!-- <div style="text-align:center;clear:both">
-<p>适用浏览器：360、FireFox、Chrome、Safari、Opera、傲游、搜狗、世界之窗. 不支持IE8及以下浏览器。</p>
-<p>来源：<a href="http://sc.chinaz.com/" target="_blank">站长素材</a></p>
-</div> -->
+  <script src="{{ asset('/js/admin/main.js') }}"></script>
 @endsection
