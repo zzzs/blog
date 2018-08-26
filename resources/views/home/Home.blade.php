@@ -15,7 +15,6 @@
 		</div>
 		@endforeach
 	</div>
-
 	<div id="content-page">
 		{!! $article_lists->render() !!}
 	</div>
