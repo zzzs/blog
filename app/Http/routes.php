@@ -59,7 +59,8 @@ Route::group(['prefix' => 'admin', 'middleware'=>'auth', 'namespace' => 'Admin']
 	Route::resource('recommends', 'RecommendsController');
 
 	//标签类型
-	Route::resource('tagtypes', 'TagtypesController');
+	Route::resource('tagtypes', 'TagTypesController');
+
 	//标签
 	Route::resource('tags', 'TagsController');
 
