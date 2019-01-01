@@ -13,7 +13,8 @@ class FileUpload
 	{
 		$this->request = $request;
 		$request_key = key($_FILES);
-		if ($request->hasFile($request_key))
+
+		if (!$request->hasFile($request_key))
 		{
 			$this->error = Error::FILE_UPLOAD_ERROR;
 			return false;
@@ -37,11 +38,12 @@ class FileUpload
 	public function checkFile()
 	{
 		$file = $this->file;
+
 		if ($file->getError() !==0) {//error
 			$this->error = Error::FILE_READ_ERROR;
 			return false;
 		}
-		if ($file->getClientSize()  > 20000) {
+		if ($file->getClientSize()  > 2097152) { // 2M
 			$this->error = Error::FILE_SIZE_ERROR;
 			return false;
 		}

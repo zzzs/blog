@@ -3,4 +3,5 @@
 .env
 composer.lock
 someelse.txt
+public/upload/admin/pic/
 
