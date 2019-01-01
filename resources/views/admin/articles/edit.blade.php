@@ -9,7 +9,6 @@
       <div class="panel-body">
         @if (count($errors) > 0)
         <div class="alert alert-danger">
-          <strong>Whoops!</strong> There were some problems with your input.<br><br>
           <ul>
             @foreach ($errors->all() as $error)
             <li>{{ $error }}</li>
@@ -105,7 +104,7 @@
                 <h4 style="text-align: center;" class="modal-title" id="previewModalLabel">Modal title</h4>
               </div>
               <div class="modal-body md-body">
-                mei dong xi yu lan ge sha
+                ...
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
