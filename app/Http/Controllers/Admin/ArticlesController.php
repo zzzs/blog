@@ -55,10 +55,19 @@ class ArticlesController extends BaseController {
 			},
 		])->paginate(15);
 
+		foreach ($articles as $key => $value) {
+			$articles[$key]['hasNewComment'] = 0;
+			foreach ($value->comments as $cvalue) {
+				if ($cvalue->status === 0) {
+					$articles[$key]['hasNewComment'] = 1;
+					break;
+				}
+			};
+		}
 		return view('admin.articles.index',[
-			'articles'=>$articles,
-			'cates'=>$cates,
-			'request'=>$request->all()
+			'articles' => $articles,
+			'cates' => $cates,
+			'request' => $request->all()
 			]);
 	}
 

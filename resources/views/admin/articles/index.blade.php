@@ -55,7 +55,7 @@
                 {{ $article->article_id }}
               </td>
               <td class="col-lg-5">
-                {{ $article->title }}
+                <a target="_blank" class="text-primary" href="/articles/{{ $article->article_id }}">{{ $article->title }}</a>
               </td>
               <td class="col-lg-2">
                 {{ $article->Tag->name }}
@@ -65,7 +65,7 @@
               </td>
               <td class="col-lg-1">
                 @if (count($article->comments->toArray()) > 0)
-                <a href="{{ URL('admin/articles/comments/'.$article->article_id) }}" class="btn btn-xs btn-info">查看</a>
+                <a href="{{ URL('admin/articles/comments/'.$article->article_id) }}" class="btn btn-xs {{ $article->hasNewComment ? 'btn-danger' : 'btn-info' }}">查看</a>
                 @else
                 <del>冷门</del>
                 @endif

@@ -5,7 +5,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="shortcut  icon" type="image/x-icon" href="{{ asset('/image/favicon16.ico') }}" media="screen"  />
-	<title>XL ADMIN</title>
+	<title>小雷</title>
 
 	<!-- <link href="{{ asset('/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
 	<link href="{{ asset('/bootstrap/css/bootstrap-theme.min.css') }}" rel="stylesheet"> -->
@@ -47,7 +47,7 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="/admin">XL ADMIN</a>
+				<a class="navbar-brand" href="/admin">小雷</a>
 			</div>
 
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
