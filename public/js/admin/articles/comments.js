@@ -1,14 +1,14 @@
 /*========== comments ==========*/
 
-$('.reply').append("<a class='del_com'>删除</a>");
-$('.comment_wait').find('.reply').append("<a class='check_com'>审核</a>");
+  $('.reply').append("<a class='del_com'>删除</a>");
+  $('.comment_wait').find('.reply').append("<a class='check_com'>审核</a>");
 
-var comid;
-$('.reply a').click(function(){
-	comid = $(this).siblings("a[data-toggle='modal']").data('comid');
-});
+  var comid;
+  $('.reply a').click(function(){
+  	comid = $(this).siblings("a[data-toggle='modal']").data('comid');
+  });
 
-var _token = "{{ csrf_token() }}";
+  var _token = "{{ csrf_token() }}";
   //删除评论
   $('.reply .del_com').confirm({
   	title: 'ARE YOU SURE ?',

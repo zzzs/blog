@@ -1,7 +1,4 @@
 /***************article.show***************/
-$(".reply a").click(function(){
-	$('#commentModal').modal('show');
-});
 $('#commentModal').on('show.bs.modal', function (event) {
 	var button = $(event.relatedTarget);
 	var modal = $(this);

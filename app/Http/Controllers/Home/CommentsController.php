@@ -34,11 +34,12 @@ class CommentsController extends Controller {
 
 		//访客数据更新
 		$guestData = [
-				'nickname' => $input['nickname'],
-				'email' => $input['email'],
-				'website' => $input['website'],
-				'ip' => $ip
-			];
+			'nickname' => $input['nickname'],
+			'email' => $input['email'],
+			'website' => $input['website'],
+			'ip' => $ip
+		];
+
 		$ret = $guest::updateOrCreate(
 			[
 				'ip' => $ip
@@ -52,7 +53,7 @@ class CommentsController extends Controller {
 			'article_id' => $input['article_id'],
 			'pid' => $input['pid'],
 			'content' => $input['content']
-			];
+		];
 
 		setcookie ("user", json_encode($guestData), time() + 30*86400, '/');
 
