@@ -37,7 +37,7 @@ Route::group(['namespace' => 'Home'], function()
 {
 	Route::get('/', 'HomeController@index');
 	Route::get( 'articles/{id}', [ 'as' => '文章详情', 'uses' => 'ArticlesController@show'] );
-	// Route::post( 'comment/store', [ 'as' => '文章搜索', 'uses' => 'CommentsController@store'] );
+	Route::post( 'comment/store', [ 'as' => '文章搜索', 'uses' => 'CommentsController@store'] );
 });
 
 Route::group(['prefix' => 'admin', 'middleware'=>'auth', 'namespace' => 'Admin'], function()
