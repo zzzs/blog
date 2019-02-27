@@ -13,7 +13,7 @@ class HomeController extends BaseController {
 	//文章列表
 	public function index(Request $request)
 	{
-		$articles = Article::select();
+		$articles = Article::select()->orderBy('created_at', 'desc');
 
 		if (!empty($request->title)) {
 			$articles->where('title','like','%'.$request->title.'%');
