@@ -10,7 +10,7 @@
 				</a>
 			</div>
 			<div class="date">
-				<p>{{ date('Y-m-d',$article['updated_at']) }}</p>
+				<p>{{ date('Y-m-d',$article['created_at']) }}</p>
 			</div>
 		</div>
 		@endforeach
